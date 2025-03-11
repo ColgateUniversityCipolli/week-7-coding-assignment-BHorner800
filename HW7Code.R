@@ -13,26 +13,33 @@
 #Question 1: Poisson probability function
 ############################################################
 # Use dpois and ppois to conditionally return the correct probability
+
 pois.prob = function(x, size, prob, type = "<="){
   '
-  input -> x (lambda), size, probability, type
-  output -> 
+  input -> x, size, prob (lambda = avg rate or mean of events), type
+  output -> Probability
   computes: P(X=x), P(X!=x), P(X<x), P(X<=x), P(X>x), or P(X>=x)
   default is P(X<=x)
   '
+  lambda = prob
   if (type == "="){
-    
+    P = dpois(x, lambda)
   }
   if (type == "!="){
+    P = 1 - dpois(x, lambda)
   }
   if (type == "<"){
+    P = ppois(x-1, lambda)
   }
   if (type ==  "<="){
+    P = ppois(x, lambda)
   }
   if (type == ">"){
+    P = 1 - ppois(x, lambda)
   }
   if (type == "<="){
+    P = 1 - ppois(x-1, lambda)
   }
+  return(P)
 }
 
-?dpois
