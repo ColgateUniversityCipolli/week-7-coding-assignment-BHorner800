@@ -40,3 +40,7 @@ pois.prob = function(x, lambda, type = "<="){
   return(P)
 }
 
+
+############################################################
+#Question 2: Poisson probability function
+############################################################
