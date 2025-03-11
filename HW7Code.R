@@ -12,16 +12,13 @@
 ############################################################
 #Question 1: Poisson probability function
 ############################################################
-# Use dpois and ppois to conditionally return the correct probability
-
-pois.prob = function(x, size, prob, type = "<="){
+pois.prob = function(x, lambda, type = "<="){
   '
-  input -> x, size, prob (lambda = avg rate or mean of events), type
+  input -> x (value), lambda (avg rate or mean of events), type
   output -> Probability
   computes: P(X=x), P(X!=x), P(X<x), P(X<=x), P(X>x), or P(X>=x)
   default is P(X<=x)
   '
-  lambda = prob
   if (type == "="){
     P = dpois(x, lambda)
   }
@@ -37,7 +34,7 @@ pois.prob = function(x, size, prob, type = "<="){
   if (type == ">"){
     P = 1 - ppois(x, lambda)
   }
-  if (type == "<="){
+  if (type == ">="){
     P = 1 - ppois(x-1, lambda)
   }
   return(P)
