@@ -113,8 +113,32 @@
 \begin{knitrout}\scriptsize
 \definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}\begin{kframe}
 \begin{alltt}
-\hldef{beta.prob} \hlkwb{<-} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{,} \hlkwc{size}\hldef{,} \hlkwc{prob}\hldef{,} \hlkwc{type}\hldef{=}\hlsng{"<="}\hldef{)\{}
-  \hlcom{# Use dbeta and pbeta to conditionally return the correct probability}
+\hldef{beta.prob} \hlkwb{=} \hlkwa{function}\hldef{(}\hlkwc{x}\hldef{,} \hlkwc{alpha}\hldef{,} \hlkwc{beta}\hldef{,} \hlkwc{type} \hldef{=} \hlsng{"<="}\hldef{)\{}
+  \hlsng{'
+  input -> x(value), alpha, beta, type
+  output -> Probability
+  computes: P(X=x), P(X!=x), P(X<x), P(X<=x), P(X>x), or P(X>=x)
+  default is P(X<=x)
+  '}
+  \hlkwa{if} \hldef{(type} \hlopt{==} \hlsng{"="}\hldef{)\{}
+    \hldef{P} \hlkwb{=} \hlnum{0} \hlcom{#distribution is continuous}
+  \hldef{\}}
+  \hlkwa{if} \hldef{(type} \hlopt{==} \hlsng{"!="}\hldef{)\{}
+    \hldef{P} \hlkwb{=} \hlnum{1}
+  \hldef{\}}
+  \hlkwa{if} \hldef{(type} \hlopt{==} \hlsng{"<"}\hldef{)\{}
+    \hldef{P} \hlkwb{=} \hlkwd{pbeta}\hldef{(x, alpha, beta)}
+  \hldef{\}}
+  \hlkwa{if} \hldef{(type} \hlopt{==}  \hlsng{"<="}\hldef{)\{}
+    \hldef{P} \hlkwb{=} \hlkwd{pbeta}\hldef{(x, alpha, beta)}
+  \hldef{\}}
+  \hlkwa{if} \hldef{(type} \hlopt{==} \hlsng{">"}\hldef{)\{}
+    \hldef{P} \hlkwb{=} \hlnum{1} \hlopt{-} \hlkwd{pbeta}\hldef{(x, alpha, beta)}
+  \hldef{\}}
+  \hlkwa{if} \hldef{(type} \hlopt{==} \hlsng{">="}\hldef{)\{}
+    \hldef{P} \hlkwb{=} \hlnum{1} \hlopt{-} \hlkwd{pbeta}\hldef{(x, alpha, beta)}
+  \hldef{\}}
+  \hlkwd{return}\hldef{(P)}
 \hldef{\}}
 \end{alltt}
 \end{kframe}

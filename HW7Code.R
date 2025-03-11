@@ -44,3 +44,30 @@ pois.prob = function(x, lambda, type = "<="){
 ############################################################
 #Question 2: Poisson probability function
 ############################################################
+beta.prob = function(x, alpha, beta, type = "<="){
+  '
+  input -> x(value),  alpha, beta, type
+  output -> Probability
+  computes: P(X=x), P(X!=x), P(X<x), P(X<=x), P(X>x), or P(X>=x)
+  default is P(X<=x)
+  '
+  if (type == "="){
+    P = 0 #distribution is continuous
+  }
+  if (type == "!="){
+    P = 1
+  }
+  if (type == "<"){
+    P = pbeta(x, alpha, beta)
+  }
+  if (type ==  "<="){
+    P = pbeta(x, alpha, beta)
+  }
+  if (type == ">"){
+    P = 1 - pbeta(x, alpha, beta)
+  }
+  if (type == ">="){
+    P = 1 - pbeta(x, alpha, beta)
+  }
+  return(P)
+}  
